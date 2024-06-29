@@ -37,7 +37,7 @@ def dibujar_tablero(tablero, pantalla):
             pygame.draw.rect(pantalla, NEGRO, rect, 1)
 
     for letra, posiciones in tablero.elementos.items():
-        color = ROJO if letra == 'A' else VERDE if letra == '0'  else GRIS if letra == 'B' else AZUL
+        color = ROJO if letra == 'A' else VERDE if letra == '0' else GRIS if letra == 'B' else AZUL
 
         for pos in posiciones:
             x, y = pos
@@ -54,11 +54,16 @@ def dibujar_tablero(tablero, pantalla):
 
     pygame.display.flip()
 
+def es_estado_meta(estado):
+    # Comprobar si alguna de las posiciones de 'A' coincide con la posición de '0'
+    posiciones_vehiculo_A = estado.vehicles['A'].positions
+    posiciones_vehiculo_0 = estado.vehicles['0'].positions
 
+    for pos_A in posiciones_vehiculo_A:
+        if pos_A in posiciones_vehiculo_0:
+            return True
 
-def es_estado_meta(estado_actual, estado_meta):
-    return estado_actual.vehicles['A'].positions == estado_meta.vehicles['A'].positions
-
+    return False
 def main():
     pantalla = pygame.display.set_mode((ANCHO, ALTO))
     pygame.display.set_caption('Juego de Tablero')
@@ -66,24 +71,15 @@ def main():
     tablero = Nivel('nivel.txt')
     tablero.leer_desde_txt()
 
-    #estado del juego: 
-    print(tablero.obtener_estado_juego())
-
-#implementacion de DFS a medias comentado aqui abajo 
-
     vehicles = {letra: Vehicle(letra, posiciones) for letra, posiciones in tablero.elementos.items()}
     estado_inicial = State(vehicles, tablero.obtener_estado_juego().board)
 
     # Encontrar la posición del '0'
     posicion_meta = tablero.elementos['0'][0]
 
-    # Definir el estado objetivo con 'A' en la posición del '0'
-    vehicles_meta = {letra: Vehicle(letra, posiciones) for letra, posiciones in tablero.elementos.items()}
-    vehicles_meta['A'] = Vehicle('A', [posicion_meta])
+    estado_meta = State(vehicles, tablero.obtener_estado_juego().board)
 
-    estado_meta = State(vehicles_meta, tablero.obtener_estado_juego().board)
-
-    solucion = dfs_solve(estado_inicial, lambda estado: es_estado_meta(estado, estado_meta))
+    solucion = dfs_solve(estado_inicial, es_estado_meta)
 
     if solucion:
         print("Solución encontrada:")
@@ -92,17 +88,16 @@ def main():
             for fila in state.board:
                 print("".join(fila))
             print()
+        # Dibujar el estado final
+        dibujar_tablero(tablero, pantalla)
     else:
         print("No se encontró solución.")
-    
 
     ejecutando = True
     while ejecutando:
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 ejecutando = False
-
-        dibujar_tablero(tablero, pantalla)
 
         pygame.time.delay(100)
 

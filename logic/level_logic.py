@@ -1,7 +1,6 @@
 from logic.estados import State
 from logic.veiculos import Vehicle
 
-
 class Nivel:
     def __init__(self, nombre_archivo, ancho_celda=50):
         self.nombre_archivo = nombre_archivo
