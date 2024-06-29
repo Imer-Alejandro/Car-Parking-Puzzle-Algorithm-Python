@@ -1,6 +1,4 @@
 # algoritmos/dfs.py
-from logic.estados import State
-
 def dfs_solve(initial_state, goal_state_func):
     stack = [initial_state]
     visited = set()

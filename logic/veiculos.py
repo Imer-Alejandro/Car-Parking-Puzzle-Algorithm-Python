@@ -19,21 +19,28 @@ class Vehicle:
                 new_positions = [(x-1, y) for x, y in self.positions]
             elif direction == 'right':
                 new_positions = [(x+1, y) for x, y in self.positions]
+            else:
+                print(f"Movimiento inválido para {self.id} hacia {direction}: {self.positions}")
+                return False  # Movimiento inválido para orientación horizontal
         elif self.orientation == 'vertical':
             if direction == 'up':
                 new_positions = [(x, y-1) for x, y in self.positions]
             elif direction == 'down':
                 new_positions = [(x, y+1) for x, y in self.positions]
+            else:
+                print(f"Movimiento inválido para {self.id} hacia {direction}: {self.positions}")
+                return False  # Movimiento inválido para orientación vertical
         
         if self.is_valid_move(new_positions, board):
             self.positions = new_positions
+            print(f"Movimiento válido para {self.id} hacia {direction}: {new_positions}")
             return True
+        print(f"Movimiento inválido para {self.id} hacia {direction}: {new_positions}")
         return False
 
     def is_valid_move(self, new_positions, board):
+        rows, cols = len(board), len(board[0])
         for x, y in new_positions:
-            if x < 0 or x >= len(board.board[0]) or y < 0 or y >= len(board.board):
-                return False
-            if board.board[y][x] != '.':
+            if x < 0 or x >= cols or y < 0 or y >= rows or board[y][x] != '.':
                 return False
         return True

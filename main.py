@@ -57,7 +57,7 @@ def dibujar_tablero(tablero, pantalla):
 
 
 def es_estado_meta(estado_actual, estado_meta):
-    return estado_actual == estado_meta
+    return estado_actual.vehicles['A'].positions == estado_meta.vehicles['A'].positions
 
 def main():
     pantalla = pygame.display.set_mode((ANCHO, ALTO))
@@ -66,32 +66,34 @@ def main():
     tablero = Nivel('nivel.txt')
     tablero.leer_desde_txt()
 
+    #estado del juego: 
+    print(tablero.obtener_estado_juego())
+
 #implementacion de DFS a medias comentado aqui abajo 
 
-    # vehicles = {letra: Vehicle(letra, posiciones) for letra, posiciones in tablero.elementos.items()}
-    # estado_inicial = State(vehicles, tablero.obtener_estado_juego())
+    vehicles = {letra: Vehicle(letra, posiciones) for letra, posiciones in tablero.elementos.items()}
+    estado_inicial = State(vehicles, tablero.obtener_estado_juego().board)
 
-    # # Encontrar la posición del '0'
-    # posicion_meta = tablero.elementos['0'][0]
+    # Encontrar la posición del '0'
+    posicion_meta = tablero.elementos['0'][0]
 
-    # # Definir el estado objetivo con 'A' en la posición del '0'
-    # vehicles_meta = {letra: Vehicle(letra, posiciones) for letra, posiciones in tablero.elementos.items()}
-    # vehicles_meta['A'] = Vehicle('A', [posicion_meta])
+    # Definir el estado objetivo con 'A' en la posición del '0'
+    vehicles_meta = {letra: Vehicle(letra, posiciones) for letra, posiciones in tablero.elementos.items()}
+    vehicles_meta['A'] = Vehicle('A', [posicion_meta])
 
-    # estado_meta = State(vehicles_meta, tablero.obtener_estado_juego())
+    estado_meta = State(vehicles_meta, tablero.obtener_estado_juego().board)
 
-    # solucion = dfs_solve(estado_inicial, lambda estado: es_estado_meta(estado, estado_meta))
+    solucion = dfs_solve(estado_inicial, lambda estado: es_estado_meta(estado, estado_meta))
 
-    # if solucion:
-    #     print("Solución encontrada:")
-    #     for state in solucion:
-    #         print("Estado del tablero:")
-    #         for fila in state.board:
-    #             print("".join(fila))
-    #         print()
-    # else:
-    #     print("No se encontró solución.")
-
+    if solucion:
+        print("Solución encontrada:")
+        for state in solucion:
+            print("Estado del tablero:")
+            for fila in state.board:
+                print("".join(fila))
+            print()
+    else:
+        print("No se encontró solución.")
     
 
     ejecutando = True
@@ -101,6 +103,7 @@ def main():
                 ejecutando = False
 
         dibujar_tablero(tablero, pantalla)
+
         pygame.time.delay(100)
 
     pygame.quit()
