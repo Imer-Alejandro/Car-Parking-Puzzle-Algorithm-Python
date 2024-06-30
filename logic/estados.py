@@ -1,5 +1,6 @@
 from logic.veiculos import Vehicle
 
+
 class State:
     def __init__(self, vehicles, board):
         self.vehicles = vehicles  # Diccionario de vehículos
@@ -26,7 +27,7 @@ class State:
                     nuevos_vehiculos = self.vehicles.copy()
                     nuevos_vehiculos[vehiculo.id] = nuevo_vehiculo
                     nuevo_estado = State(nuevos_vehiculos, self.actualizar_board(nuevos_vehiculos))
-                    nuevos_estados.append(nuevo_estado)
+                    nuevos_estados.append((nuevo_estado, f"{vehiculo.id}-{direccion[0].upper()}"))
 
         return nuevos_estados
 
