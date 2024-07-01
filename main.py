@@ -1,6 +1,7 @@
 import pygame
 import sys
 
+from algoritmos.AST import a_star_solve
 from algoritmos.DFS import dfs_solve
 from algoritmos.BFS import bfs_solve
 from logic.estados import State
@@ -97,6 +98,9 @@ def main():
     #     print("No se encontró solución.")
 
 
+
+
+
 # Implementacion de BFS aqui debajo de este comentario
 
     # vehicles = {letra: Vehicle(letra, posiciones) for letra, posiciones in tablero.elementos.items()}
@@ -109,6 +113,33 @@ def main():
 
     # # Implementación de BFS aquí
     # solucion = bfs_solve(estado_inicial, es_estado_meta)
+
+    # if solucion:
+    #     print("Solución encontrada:")
+    #     for state in solucion:
+    #         print("Estado del tablero:")
+    #         for fila in state.board:
+    #             print("".join(fila))
+    #         print()
+    #     # Dibujar el estado final
+    #     dibujar_tablero(tablero, pantalla)
+    # else:
+    #     print("No se encontró solución.")
+
+
+
+
+#implementacion de AST aqui 
+
+    # vehicles = {letra: Vehicle(letra, posiciones) for letra, posiciones in tablero.elementos.items()}
+    # estado_inicial = State(vehicles, tablero.obtener_estado_juego().board)
+
+    # # Encontrar la posición del '0'
+    # posicion_meta = tablero.elementos['0'][0]
+
+    # estado_meta = State(vehicles, tablero.obtener_estado_juego().board)
+
+    # solucion = a_star_solve(estado_inicial, es_estado_meta)
 
     # if solucion:
     #     print("Solución encontrada:")
