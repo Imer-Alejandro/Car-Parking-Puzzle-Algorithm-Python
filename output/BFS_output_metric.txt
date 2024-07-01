@@ -1,7 +1,7 @@
-path_to_goal: ['A-U', 'A-U']
-cost_of_path: 2
-nodes_expanded: 3
-search_depth: 2
-max_search_depth: 2
-running_time: 0.01486921
-max_ram_usage: 44492.00000000
+path_to_goal: ['D-R', 'D-R', 'F-D', 'F-D', 'A-R', 'A-R', 'A-R', 'A-R', 'A-R']
+cost_of_path: 9
+nodes_expanded: 149
+search_depth: 9
+max_search_depth: 10
+running_time: 0.49089861
+max_ram_usage: 44744.00000000

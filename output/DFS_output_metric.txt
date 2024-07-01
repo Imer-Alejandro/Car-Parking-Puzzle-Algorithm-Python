@@ -1,7 +1,7 @@
-path_to_goal: ['A-U', 'A-U']
-cost_of_path: 2
-nodes_expanded: 3
-search_depth: 2
-max_search_depth: 2
-running_time: 0.00920057
-max_ram_usage: 44344.00000000
+path_to_goal: ['T-L', 'D-L', 'T-R', 'D-L', 'T-L', 'T-L', 'T-L', 'A-R', 'T-R', 'T-R', 'T-R', 'D-R', 'T-L', 'T-L', 'R-U', 'T-R', 'T-R', 'D-R', 'T-L', 'R-D', 'T-R', 'D-R', 'R-U', 'F-D', 'D-L', 'T-L', 'D-L', 'T-R', 'D-L', 'T-L', 'T-L', 'T-L', 'D-L', 'T-R', 'T-R', 'T-R', 'D-L', 'T-L', 'T-L', 'T-L', 'T-L', 'T-L', 'F-D', 'A-R', 'A-R', 'A-R', 'A-R', 'A-R']
+cost_of_path: 48
+nodes_expanded: 49
+search_depth: 48
+max_search_depth: 48
+running_time: 0.17420220
+max_ram_usage: 44484.00000000
